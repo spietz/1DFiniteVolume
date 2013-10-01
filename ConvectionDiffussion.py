@@ -271,7 +271,7 @@ temp_ex = temp_exact(Pe, xt)  # exact solution for given problem,Pe,n
 fig1 = plt.figure(1)
 fig1.clf()
 
-#Temperature field
+# Temperature field
 f, axarr = plt.subplots(2, sharex=True)
 
 axarr[0].set_title("Convection-diffusion by %s for Pe = %d \n Flux-error = %0.3e" \
