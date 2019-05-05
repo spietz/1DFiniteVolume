@@ -1,5 +1,5 @@
 
-import SIMPy
+import simpy
 import numpy as np
 import matplotlib.pyplot as plt
 from scipy.sparse import spdiags
@@ -75,7 +75,7 @@ elif fvscheme.lower() == "uds-cds":  # UDS-CDS FV-scheme applied
         ae = (-1./dx)+np.minimum(0, conv_face_flux_e)
         ap = -(ae+aw)+conv_face_flux_e-conv_face_flux_w
 
-else:	 # fvscheme unknown
+else:    # fvscheme unknown
         print("fvscheme not implemented")
 
 
@@ -160,7 +160,7 @@ elif fvscheme.lower() == "uds-cds":  # UDS-CDS FV-scheme applied
                 s[n-1] = s[n-1]-ae[n-1]*2*temp_b
                 ae[n-1] = 0
 
-else:	 # fvscheme unknown
+else:    # fvscheme unknown
         print("fvscheme not implemented")
 
 ## Assemble tri-diagonal system matrix
@@ -179,7 +179,7 @@ if linsolver.lower() == "direct":  # direct solver
         temp = spsolve(A, s)
 elif linsolver.lower() == "jacobi" \
      or linsolver.lower() == "gs" or linsolver.lower() == "sor":
-        temp, _, _, _, _ = SIMPy.solve(A, s,
+        temp, _, _, _, _ = simpy.solve(A, s,
             "sor", 500, 1e-4, omegaSOR, s*0, False)  # iterative solution
 else:
         print("linsolver not implemented")
@@ -268,8 +268,6 @@ xt[1:n+1:1] = xc[:]  # extended cell center coor. vector, incl. walls
 ## Compute exact solution
 temp_ex = temp_exact(Pe, xt)  # exact solution for given problem,Pe,n
 
-fig1 = plt.figure(1)
-fig1.clf()
 
 # Temperature field
 f, axarr = plt.subplots(2, sharex=True)
@@ -290,7 +288,7 @@ axarr[1].set_ylabel("error")
 axarr[1].set_title("Truncation error on T(x)")
 axarr[1].grid(True)
 
-fig1.ion()
-fig1.show()
+#plt.ion()
+plt.show(block=True)
 
 print("done!")
