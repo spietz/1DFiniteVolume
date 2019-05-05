@@ -258,6 +258,8 @@ flux_error = abs((conv_flux_a-diff_flux_a)-(conv_flux_b-diff_flux_b))
 
 ## PLOTS
 
+plt.ion()
+
 # Coordinate arrays
 dx = L/n  # cell size in x,y-direction
 xc = np.arange(dx/2., L, dx)  # cell center coordinate vector along x,y-axis
@@ -288,7 +290,6 @@ axarr[1].set_ylabel("error")
 axarr[1].set_title("Truncation error on T(x)")
 axarr[1].grid(True)
 
-#plt.ion()
-plt.show(block=True)
+plt.tight_layout()
 
 print("done!")
